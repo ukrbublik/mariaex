@@ -311,7 +311,7 @@ defmodule Mariaex.Protocol do
   DBConnection callback
   """
   def checkout(%{buffer: :active_once, sock: {sock_mod, sock}} = s) do
-    case setopts(s, [active: :false], :active_once) do
+    case setopts(s, [active: 0], :active_once) do
       :ok                       -> sock_mod.recv_active(sock, 0, "") |> handle_recv_buffer(s)
       {:disconnect, _, _} = dis -> dis
     end
